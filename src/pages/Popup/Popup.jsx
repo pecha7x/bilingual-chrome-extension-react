@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from '../../assets/img/logo.svg';
-import Greetings from '../../containers/Greetings/Greetings';
+import React, { useEffect, useState } from 'react';
+
+import logo from '../../assets/img/logo.png';
 import './Popup.css';
+import Vocabularies from './components/Vocabularies';
 
 const Popup = () => {
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffect(() => {
+    chrome.storage.local.get('currentUser', (item) => {
+      setCurrentUser(item.currentUser);
+    })
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Popup/Popup.jsx</code> and save to reload.
-        </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://bilingual.ai"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React!
+          To be Bilingual 
         </a>
       </header>
+
+      {
+        currentUser && 
+          <Vocabularies items={currentUser.vocabularies} currentUser={currentUser} />
+      }
     </div>
   );
 };

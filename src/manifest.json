@@ -4,13 +4,14 @@
   "description": "Add terms to your Bilingual vocabulary",
   "version": "1.0",
   "options_page": "options.html",
+  "permissions": [
+    "contextMenus",
+    "storage"
+  ],
   "background": { "service_worker": "background.bundle.js" },
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"
-  },
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"
   },
   "icons": {
     "128": "icon-128.png"
@@ -22,6 +23,9 @@
       "css": ["content.styles.css"]
     }
   ],
+  "externally_connectable": {
+    "matches": ["http://localhost:3000/*"]
+  },
   "devtools_page": "devtools.html",
   "web_accessible_resources": [
     {
